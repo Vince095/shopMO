@@ -1,9 +1,12 @@
 import React, { Fragment, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Row, Col, CardBody, Card, Button } from 'reactstrap';
 
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import Sidebar from './Sidebar'
+import SalesChart from './charts/Sales';
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -55,7 +58,9 @@ const Dashboard = () => {
                                     <div className="card text-white bg-primary o-hidden h-100">
                                         <div className="card-body">
                                             <div className="text-center card-font-size">Total Amount<br /> <b>M{totalAmount && totalAmount.toFixed(2) * rate}</b>
+                                                 
                                             </div>
+                                             
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +139,47 @@ const Dashboard = () => {
                                         </Link>
                                     </div>
                                 </div>
+                                
                             </div>
+                            <h2 className="my-4">Statistics</h2>
+                            
+                            
+                            <div className="col-xl-4 col-sm-6 mb-3">
+                                    <Card className="card text-white bg-premium o-hidden h-100">
+                                        <div className="card-body">
+                                <div className="d-flex align-items-start">
+                                    <div className="font-weight-bold">
+                                    <small className="text-black-50 d-block mb-1 text-uppercase">
+                                        New Accounts
+                                    </small>
+                                    <span className="font-size-xxl mt-1 blue">{Math.floor(Math.random() * (10000 - 100 + 1)) + 10}</span>
+                                    </div>
+                                    <div className="ml-auto">
+                                    <div className="bg-white text-center text-success  rounded-circle">
+                                        <i className="fa fa-bar-chart"></i>
+                                       
+                                    </div>
+                                    </div>
+                                </div>
+                                <div className="mt-3">
+                                    <i className="fa fa-caret-up text-success mr-1"></i>
+                                   
+                                    <span className="text-success pr-1">{(Math.floor(Math.random() * (100.00 - 0.50 + 1.01)) + 1.01).toFixed(2)}%</span>
+                                    <span className="text-black-50">increase this month</span>
+                                </div>
+                                </div>
+                                </Card>
+                            </div>
+                      
+
+                            <div className="row pr-4">
+                                <div className="col-xl-12 col-sm-12 mb-3">
+                                    <div className="card text-white  o-hidden h-100">
+                                        <SalesChart/>
+                                    </div>
+                                </div>
+                            </div>
+
                         </Fragment>
                     )}
 

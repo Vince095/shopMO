@@ -220,10 +220,17 @@ nav {
 /* Footer */
 footer {
   margin-top: 8rem;
-  color: grey;
+  color: rgb(237, 232, 232);
   bottom: 0;
   width: 100%;
+  background-color: #232f3e;
 }
+.line{
+  border-bottom: 1px solid #4e6475a4;
+  width: 100%;
+  margin-top: 1rem;
+}
+
 
 /* Ratings */
 
@@ -680,7 +687,15 @@ ul.CTAs a {
 .card-font-size {
   font-size: 1.5rem;
 }
-
+.bg-premium {
+  background-color:  #bdf0ff;
+  border-radius: 50px 10px;
+  padding: 0.5rem;
+ 
+}
+.blue {
+  color: #42427D;
+}
 /* Reviews */
 
 .rating {

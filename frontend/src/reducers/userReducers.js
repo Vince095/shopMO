@@ -32,6 +32,9 @@ import {
     UPDATE_USER_SUCCESS,
     UPDATE_USER_RESET,
     UPDATE_USER_FAIL,
+    USER_COUNTRY_REQUEST,
+    USER_COUNTRY_SUCCESS,
+    USER_COUNTRY_FAIL,
     DELETE_USER_REQUEST,
     DELETE_USER_SUCCESS,
     DELETE_USER_RESET,
@@ -261,6 +264,41 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
             }
 
         case USER_DETAILS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+// USER COUNTRY REDUCER
+export const userCountryReducer = (state = { user: {} }, action) => {
+    switch (action.type) {
+
+        case USER_COUNTRY_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case USER_COUNTRY_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                user: action.payload
+            }
+
+        case USER_COUNTRY_FAIL:
             return {
                 ...state,
                 loading: false,

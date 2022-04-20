@@ -12,6 +12,7 @@ import Display from './layout/Slider'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert';
 import { getProducts } from '../actions/productActions'
+import { getCountry } from '../actions/userActions';
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range)
@@ -45,6 +46,7 @@ const Home = ({ match }) => {
     const dispatch = useDispatch();
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
+    const location = useSelector(state => state.userCountry)
 
     const keyword = match.params.keyword
 
@@ -57,6 +59,7 @@ const Home = ({ match }) => {
         }
 
         dispatch(getProducts(keyword, currentPage, price, category, rating));
+        dispatch(getCountry());
 
 
     }, [dispatch, alert, error, keyword, currentPage, price, category, rating])
@@ -84,6 +87,7 @@ const Home = ({ match }) => {
                 <Fragment>
                     <MetaData title={'Buy Best Products Online'} />
                                 <Display/>
+                                
                                 <div className="category">
                                  <ul>
                                                     {categories.map(category => (
@@ -109,6 +113,7 @@ const Home = ({ match }) => {
                                     
                                 
                     <h1 id="products_heading">Latest Products</h1>
+                    from <i class="fa fa-map-marker" aria-hidden="true"></i> {location.user.country}, {location.user.city}
                             
 
                     <section id="products" className="container mt-5">
@@ -193,6 +198,7 @@ const Home = ({ match }) => {
 
                                     <div className="col-6 col-md-9">
                                         <div className="row">
+                                            
                                             {recommendProduct.map(product => (
                                                 <Product key={product._id} product={product} col={4} />
                                             ))}
@@ -200,8 +206,10 @@ const Home = ({ match }) => {
                                     </div>
                                 </Fragment>
                             ) : (
+                                
                                     recommendProduct.map(product => (
                                       <Product key={product._id} product={product} col={3} />
+
                                     ))
                                 )}
 

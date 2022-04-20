@@ -1,8 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import {  useSelector } from 'react-redux'
+
 const Product = ({ product, col }) => {
-    const exRate = 20;
+
+    const location = useSelector(state => state.userCountry)
+    let exRate = 1;
+
+    const currency = () => {
+        if (location.user.country === 'Nigeria') {
+            exRate = 414.48;
+            return '₦'
+        } else if (location.user.country === 'Ghana') {
+            exRate = 7.51;
+            return '₵'
+        }else if (location.user.country === 'Lesotho') {
+            exRate = 16;
+            return 'M'
+        }else if (location.user.country === 'South Africa') {
+            exRate = 16;
+            return 'R'
+        }else {
+            return '$'
+        }   
+    }
     return (
         <div className={`col-sm-12 col-md-6 col-lg-${col} my-3`}>
             <div className="card p-3 rounded">
@@ -20,7 +42,7 @@ const Product = ({ product, col }) => {
                         </div>
                         <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
                     </div>
-                    <p className="card-text">M {(product.price*exRate).toFixed(2)}</p>
+                    <p className="card-text"><small>{currency()}</small> {(product.price*exRate).toFixed(2)}</p>
                     <Link to={`/product/${product._id}`} id="view_btn" className="btn btn-block">View Details</Link>
                 </div>
             </div>

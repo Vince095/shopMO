@@ -46,7 +46,9 @@ import Privacy from './components/layout/Privacy'
 
 import ProtectedRoute from './components/route/ProtectedRoute'
 import { loadUser } from './actions/userActions'
-import { useSelector } from 'react-redux'
+import { getCountry } from './actions/userActions'
+import { useDispatch ,useSelector } from 'react-redux'
+
 import store from './store'
 import axios from 'axios'
 
@@ -55,11 +57,14 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
 
+
 function App() {
 
   const [stripeApiKey, setStripeApiKey] = useState('');
-
+  const dispatch = useDispatch();
+  
   useEffect(() => {
+    dispatch(getCountry())
     store.dispatch(loadUser())
 
     async function getStripApiKey() {
@@ -69,6 +74,7 @@ function App() {
     }
 
     getStripApiKey();
+
 
   }, [])
 

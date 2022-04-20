@@ -26,6 +26,7 @@ const projectSchema = new mongoose.Schema({
             ],
             message: 'Please select correct subject'
         }
+        
     },
     description: {
         type: String,

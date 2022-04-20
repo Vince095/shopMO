@@ -122,6 +122,27 @@ const ProductDetails = ({ match }) => {
         dispatch(newReview(formData));
     }
 
+    const location = useSelector(state => state.userCountry)
+    let exRate = 1;
+
+    const currency = () => {
+        if (location.user.country === 'Nigeria') {
+            exRate = 414.48;
+            return '₦'
+        } else if (location.user.country === 'Ghana') {
+            exRate = 7.51;
+            return '₵'
+        }else if (location.user.country === 'Lesotho') {
+            exRate = 16;
+            return 'M'
+        }else if (location.user.country === 'South Africa') {
+            exRate = 16;
+            return 'R'
+        }else {
+            return '$'
+        }   
+    }
+
     return (
         <Fragment>
             {loading ? <Loader /> : (
@@ -151,7 +172,7 @@ const ProductDetails = ({ match }) => {
 
                             <hr />
 
-                            <p id="product_price">M{(product.price*20).toFixed(2)}</p>
+                            <p id="product_price"><small>{currency()}</small>{(product.price*exRate).toFixed(2)}</p>
                             <div className="stockCounter d-inline">
                                 <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
 
@@ -227,10 +248,11 @@ const ProductDetails = ({ match }) => {
                     )}
 
                             <div className="related-items">
-                               <h2> Related items </h2>
+                               
                                     {product.category && product.reviews.length>0 && (
                                         
                                         <ul className="">
+                                            <h2> Related items </h2>
                                             {recommendProduct.map(product => (
                                                <li
                                                 style = {{
