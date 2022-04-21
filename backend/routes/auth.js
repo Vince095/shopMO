@@ -16,7 +16,8 @@ const {
     deleteUser,
     registerSeller,
     getAllSellers,
-    deleteSeller
+    deleteSeller,
+    getGeoLocation
 
 } = require('../controllers/authController');
 
@@ -46,5 +47,7 @@ router.route('/admin/seller/new')
 
 router.route('/admin/seller/:id')
     .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteSeller)
+
+router.route('/geo').get(getGeoLocation)
 
 module.exports = router;

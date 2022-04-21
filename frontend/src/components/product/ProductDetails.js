@@ -126,16 +126,16 @@ const ProductDetails = ({ match }) => {
     let exRate = 1;
 
     const currency = () => {
-        if (location.user.country === 'Nigeria') {
+        if (location.user.country_name === 'Nigeria') {
             exRate = 414.48;
             return '₦'
-        } else if (location.user.country === 'Ghana') {
+        } else if (location.user.country_name === 'Ghana') {
             exRate = 7.51;
             return '₵'
-        }else if (location.user.country === 'Lesotho') {
+        }else if (location.user.country_name === 'Lesotho') {
             exRate = 16;
             return 'M'
-        }else if (location.user.country === 'South Africa') {
+        }else if (location.user.country_name === 'South Africa') {
             exRate = 16;
             return 'R'
         }else {
