@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const projectSchema = new mongoose.Schema({
+const newsletterSchema = new mongoose.Schema({
 
     email: {
         type: String,
