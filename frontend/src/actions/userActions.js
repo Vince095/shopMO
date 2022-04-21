@@ -339,7 +339,7 @@ export const getCountry = () => async (dispatch) => {
 
         dispatch({ type: USER_COUNTRY_REQUEST })
 
-        const { data } = await axios.get(`http://ip-api.com/json`)
+        const { data } = await axios.get(`https://api.freegeoip.app/json/?apikey=301e9bf0-c1a6-11ec-b7cc-f9f2e207eb5f`)
 
         dispatch({
             type: USER_COUNTRY_SUCCESS,

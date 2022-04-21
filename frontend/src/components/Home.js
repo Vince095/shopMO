@@ -113,7 +113,7 @@ const Home = ({ match }) => {
                                     
                                 
                     <h1 id="products_heading">Latest Products</h1>
-                    from <i class="fa fa-map-marker" aria-hidden="true"></i> {location.user.country}, {location.user.city}
+                    from <i class="fa fa-map-marker" aria-hidden="true"></i> {location.user.country_name}, {location.user.city}
                             
 
                     <section id="products" className="container mt-5">
