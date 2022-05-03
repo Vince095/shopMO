@@ -126,16 +126,25 @@ const ProductDetails = ({ match }) => {
     let exRate = 1;
 
     const currency = () => {
-        if (location.user.country_name === 'Nigeria') {
+
+        let data = location.user.data;
+        let country = '';
+        for(let item in data){
+            if(item === "country"){
+                
+               country = data[item];
+            }
+        }
+        if (country === 'Nigeria') {
             exRate = 414.48;
             return '₦'
-        } else if (location.user.country_name === 'Ghana') {
+        } else if (country === 'Ghana') {
             exRate = 7.51;
             return '₵'
-        }else if (location.user.country_name === 'Lesotho') {
+        }else if (country === 'Lesotho') {
             exRate = 16;
             return 'M'
-        }else if (location.user.country_name === 'South Africa') {
+        }else if (country === 'South Africa') {
             exRate = 16;
             return 'R'
         }else {

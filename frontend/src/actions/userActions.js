@@ -339,11 +339,11 @@ export const getCountry = () => async (dispatch) => {
 
         dispatch({ type: USER_COUNTRY_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/geo`)
+        const { data } = await axios.get('/api/v1/geo')
 
         dispatch({
             type: USER_COUNTRY_SUCCESS,
-            payload: data.data
+            payload: data
         })
 
     } catch (error) {

@@ -1,7 +1,7 @@
 # Node server
 FROM node:16 as node-server
 WORKDIR /backend/app
-COPY . /backend/app
+COPY . /backend/server
 COPY . /frontend/app
 COPY package*.json ./
 RUN rm -f package-lock.json \

@@ -9,6 +9,7 @@ import Loader from './layout/Loader'
 import shuffleArray from './product/shuffleArray'
 import Display from './layout/Slider'
 
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert';
 import { getProducts } from '../actions/productActions'
@@ -46,7 +47,7 @@ const Home = ({ match }) => {
     const dispatch = useDispatch();
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
-    const location = useSelector(state => state.userCountry)
+const lookup = useSelector(state => state.userCountry)
 
     const keyword = match.params.keyword
 
@@ -79,7 +80,34 @@ const Home = ({ match }) => {
     if (keyword) {
         count = filteredProductsCount
     }
+    
+    let country = '';
+    //traverse through location object to get country name
+    function traverse_it(obj){
+        for(var prop in obj){
+            if(obj[prop] instanceof Object || obj[prop] instanceof Array){
+                // object
+                traverse_it(obj[obj[prop]]);
+            }else{
+                // something else
+                if(prop === "country"){
+                    country = obj[prop];
+                    console.log('The value of '+prop+' is '+obj[prop]+'.');
+                }
+                
+            }
+        }
+    }
+    
+    let data = lookup.user.data;
+    for(let item in data){
+        if(item === "country"){
 
+           console.log(data[item]);
+        }
+    } traverse_it(lookup.user.data);
+   
+    //console.log(lookup.user.data);
 
     return (
         <Fragment>
@@ -113,7 +141,8 @@ const Home = ({ match }) => {
                                     
                                 
                     <h1 id="products_heading">Latest Products</h1>
-                    from <i class="fa fa-map-marker" aria-hidden="true"></i> {location.user.country_name}, {location.user.city}
+                   
+                    from <i class="fa fa-map-marker" aria-hidden="true"></i> {country}
                             
 
                     <section id="products" className="container mt-5">

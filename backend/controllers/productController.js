@@ -274,3 +274,17 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
         success: true
     })
 })
+
+//get product from seller => /api/v1/seller/products
+exports.getProductFromSeller = catchAsyncErrors(async (req, res, next) => {
+    
+        const products = await Product.find({
+            seller: req.query.seller
+        });
+    
+        res.status(200).json({
+            success: true,
+            products
+        })
+    })
+

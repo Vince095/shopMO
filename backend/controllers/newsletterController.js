@@ -20,7 +20,7 @@ exports.getAllNewsletters = catchAsyncErrors(async (req, res, next) => {
     const newsletters = await Newsletter.find();
 
     if (!newsletters) {
-        return next(new ErrorHandler('No mail found found', 404));
+        return next(new ErrorHandler('No mail found', 404));
     }
 
     res.status(200).json({
