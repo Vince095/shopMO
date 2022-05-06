@@ -142,7 +142,7 @@ const ProductDetails = ({ match }) => {
             exRate = 7.51;
             return '₵'
         }else if (country === 'Lesotho') {
-            exRate = 16;
+            exRate = 17;
             return 'M'
         }else if (country === 'South Africa') {
             exRate = 16;

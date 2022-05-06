@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert';
 import { getProducts } from '../actions/productActions'
 import { getCountry } from '../actions/userActions';
+import { getSellerProducts } from '../actions/sellerActions';
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range)
@@ -47,7 +48,9 @@ const Home = ({ match }) => {
     const dispatch = useDispatch();
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
-const lookup = useSelector(state => state.userCountry)
+    const lookup = useSelector(state => state.userCountry)
+    const sellerProduct = useSelector(state => state.sellerProduct)
+
 
     const keyword = match.params.keyword
 
@@ -61,6 +64,7 @@ const lookup = useSelector(state => state.userCountry)
 
         dispatch(getProducts(keyword, currentPage, price, category, rating));
         dispatch(getCountry());
+        dispatch(getSellerProducts('Anta sports'));
 
 
     }, [dispatch, alert, error, keyword, currentPage, price, category, rating])

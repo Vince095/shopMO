@@ -45,7 +45,7 @@ const sellerSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
-        required: false
+        required: true
     },
     createdAt: {
         type: Date,

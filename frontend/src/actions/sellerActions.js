@@ -10,6 +10,8 @@ import {
     ALL_SELLER_REQUEST,
     ALL_SELLER_SUCCESS,
     ALL_SELLER_FAIL,
+    SELLER_PRODUCT_SUCCESS,
+    SELLER_PRODUCT_FAIL,
     DELETE_SELLER_REQUEST,
     DELETE_SELLER_SUCCESS,
     DELETE_SELLER_FAIL,
@@ -83,6 +85,27 @@ export const deleteSeller = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: DELETE_SELLER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+//get seller products
+export const getSellerProducts = (seller) => async (dispatch) => {
+    try {
+
+        dispatch({ type: LOAD_SELLER_REQUEST })
+
+        const { data } = await axios.get(`/api/v1/products?seller=${ seller }`)
+
+        dispatch({
+            type: SELLER_PRODUCT_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: SELLER_PRODUCT_FAIL,
             payload: error.response.data.message
         })
     }

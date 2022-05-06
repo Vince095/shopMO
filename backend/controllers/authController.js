@@ -288,7 +288,24 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 //Register Seller  =>  /api/v1/admin/seller/new
 exports.registerSeller = catchAsyncErrors(async (req, res, next) => {
 
-    const seller = await Seller.create(req.body)
+    const {
+
+        name,
+        description,
+        phone,
+        address,
+        category
+
+    } = req.body;
+
+    const seller = await Seller.create( {
+        name,
+        description,
+        phone,
+        address,
+        category,
+        user: req.user._id
+    })
 
     res.status(200).json({
         success: true,

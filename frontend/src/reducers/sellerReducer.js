@@ -5,6 +5,9 @@ import {
     ALL_SELLER_REQUEST,
     ALL_SELLER_SUCCESS,
     ALL_SELLER_FAIL,
+    SELLER_PRODUCT_SUCCESS,
+    SELLER_PRODUCT_REQUEST,
+    SELLER_PRODUCT_FAIL,
     DELETE_SELLER_REQUEST,
     DELETE_SELLER_SUCCESS,
     DELETE_SELLER_FAIL,
@@ -116,3 +119,39 @@ export const sellerReducer = (state = {}, action) => {
             return state
     }
 }
+
+//seller products reducer
+
+export const sellerProductReducer = (state = { products: [] }, action) => {
+    switch (action.type) {
+
+        case SELLER_PRODUCT_REQUEST:
+            return {
+                loading: true,
+                products : []
+            }
+
+        case SELLER_PRODUCT_SUCCESS:
+            return {
+            
+                loading: false,
+                sellers: action.payload
+            }
+
+        case SELLER_PRODUCT_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+

@@ -6,7 +6,7 @@ import { productsReducer, newProductReducer, productReducer, productDetailsReduc
 import { authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer,userCountryReducer } from './reducers/userReducers'
 import { cartReducer } from './reducers/cartReducers'
 import { newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer } from './reducers/orderReducers'
-import { allSellerReducer, newSellerReducer, sellerReducer } from './reducers/sellerReducer'
+import { allSellerReducer, newSellerReducer, sellerReducer,sellerProductReducer } from './reducers/sellerReducer'
 
 const reducer = combineReducers({
     products: productsReducer,
@@ -30,7 +30,8 @@ const reducer = combineReducers({
     newSeller: newSellerReducer,
     allSellers: allSellerReducer,
     seller: sellerReducer,
-    userCountry: userCountryReducer
+    userCountry: userCountryReducer,
+    sellerProduct: sellerProductReducer
 })
 
 

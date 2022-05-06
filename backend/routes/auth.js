@@ -43,7 +43,7 @@ router.route('/admin/user/:id')
     .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteUser)
 
 router.route('/admin/seller/new')
-    .post(isAuthenticatedUser, authorizeRoles('admin'), registerSeller)
+    .post(isAuthenticatedUser, registerSeller)
 
 router.route('/admin/seller/:id')
     .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteSeller)

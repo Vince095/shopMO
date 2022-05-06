@@ -8,7 +8,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { NEW_SELLER_RESET } from '../../constants/sellerConstants'
 import { newSeller } from '../../actions/sellerActions'
+import { allUsers } from '../../actions/userActions'
 import { clearErrors} from '../../actions/productActions'
+
 
 const NewSeller = ({ history }) => {
 
@@ -37,6 +39,7 @@ const NewSeller = ({ history }) => {
     const dispatch = useDispatch();
 
     const { loading, error, success } = useSelector(state => state.newSeller);
+    const { user } = useSelector(state => state.auth);
 
     useEffect(() => {
 
@@ -72,10 +75,12 @@ const NewSeller = ({ history }) => {
         <Fragment>
             <MetaData title={'New seller'} />
             <div className="row">
-                <div className="col-12 col-md-2">
-                    <Sidebar />
-                </div>
+                {user.role === 'admin' &&
+                    <div className="col-12 col-md-2">
+                        <Sidebar />
+                    </div>
 
+                }
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <div className="wrapper my-5">
@@ -129,9 +134,7 @@ const NewSeller = ({ history }) => {
 
                                     </select>
                                 </div>
-                            
-
-                                    
+                        
                               
                                  
                                 <button
@@ -140,7 +143,8 @@ const NewSeller = ({ history }) => {
                                     className="btn btn-block py-3"
                                     disabled={loading ? true : false}
                                 >
-                                    CREATE
+                                    {loading ? (<box-icon color='#fff' animation='spin' name='loader'></box-icon>): 'CREATE'}
+                        
                                 </button>
 
                             </form>
