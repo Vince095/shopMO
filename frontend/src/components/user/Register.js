@@ -9,6 +9,7 @@ import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { register, clearErrors } from '../../actions/userActions'
 
+
 const Register = ({ history }) => {
 
     const [user, setUser] = useState({
@@ -181,6 +182,8 @@ const Register = ({ history }) => {
                             </div>
                              <p className='wrongSize' style ={{display:'none',color:'#a43242',size:'2px'}}>please use an image below 1MB</p>
                         </div>
+
+                       
 
                         <button
                             id="register_button"

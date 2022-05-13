@@ -8,11 +8,11 @@ import order from './images/odering.png'
 
 const Slider = () => {
     return (
-      <div className="slider "  >
+      <div className="slider"  >
 
           <Carousel pause="hover">
             <Carousel.Item key="1">
-              <img className="d-block w-100" src={pic} alt="slide1" />
+              <img className="d-block w-100 " src={pic} alt="slide1" />
             </Carousel.Item>
             <Carousel.Item key="2">
               <img className="d-block w-100" src={shop} alt="slide2" />

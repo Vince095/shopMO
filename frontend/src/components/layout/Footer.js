@@ -1,13 +1,29 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import 'boxicons'
+import {useSelector, } from 'react-redux'
 
 const Footer = () => {
+
+    const { user, loading } = useSelector(state => state.auth)
     
     return (
         <Fragment>
             <footer className="py-1">
                 <div className="container">
+                    <div className="row " 
+                        style={{color:'#EAA221',align:'center', fontSize:'1.2rem', fontWeight:'bold'}}>
+                        {user && user.role === 'user' && (
+                        <div className="col-6 col-md">
+                            <p className="text-center">
+                                <Link className='' to="/seller/new" style={{color:'#EAA221'}}>
+                                  <i className='fa fa-handshake-o' ></i>  Become a seller
+                                </Link>
+                            </p>
+                        </div>)}
+                    </div>
+                        <div className="col-12 col-md-6">
+                     </div>
                     <div className="row">
                         
                         <div className="col-6 col-md">

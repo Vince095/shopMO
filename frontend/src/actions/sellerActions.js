@@ -35,7 +35,7 @@ export const newSeller = (sellerData) => async (dispatch) => {
 
         dispatch({
             type: REGISTER_SELLER_SUCCESS,
-            payload: data.success
+            payload: data
         })
 
     } catch (error) {
