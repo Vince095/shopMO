@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { NEW_SELLER_RESET } from '../../constants/sellerConstants'
 import { newSeller } from '../../actions/sellerActions'
-import { allUsers } from '../../actions/userActions'
+import { updateUser } from '../../actions/userActions'
 import { clearErrors} from '../../actions/productActions'
 
 
@@ -19,6 +19,7 @@ const NewSeller = ({ history }) => {
     const [category, setCategory] = useState('');
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [ role, setRole] = useState('');
    
     const categories = [
         'Electronics',
@@ -47,14 +48,20 @@ const NewSeller = ({ history }) => {
             alert.error(error);
             dispatch(clearErrors())
         }
+        console.log(user._id)
 
         if (success) {
             history.push('/admin/sellers');
             alert.success('Seller created successfully');
+            dispatch(updateUser(user._id, { 
+                name: user.name,
+                email: user.email,
+                role 
+            } ));
             dispatch({ type: NEW_SELLER_RESET })
         }
 
-    }, [dispatch, alert, error, success, history])
+    }, [dispatch, alert, error, success, history, user, role])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -67,10 +74,11 @@ const NewSeller = ({ history }) => {
         formData.set('address', address);
 
         dispatch(newSeller(formData))
+        setRole('seller');
     }
 
    
-    
+   
     return (
         <Fragment>
             <MetaData title={'New seller'} />

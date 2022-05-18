@@ -39,7 +39,7 @@ router.route('/sellers').get(isAuthenticatedUser, getAllSellers)
 router.route('/admin/users').get(isAuthenticatedUser, authorizeRoles('admin'), allUsers)
 router.route('/admin/user/:id')
     .get(isAuthenticatedUser, authorizeRoles('admin'), getUserDetails)
-    .put(isAuthenticatedUser, authorizeRoles('admin'), updateUser)
+    .put(isAuthenticatedUser, authorizeRoles('admin','user'), updateUser)
     .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteUser)
 
 router.route('/admin/seller/new')

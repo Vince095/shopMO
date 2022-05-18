@@ -64,7 +64,7 @@ const Home = ({ match }) => {
 
         dispatch(getProducts(keyword, currentPage, price, category, rating));
         dispatch(getCountry());
-        dispatch(getSellerProducts('Anta sports'));
+       // dispatch(getSellerProducts('Anta sports'));
 
 
     }, [dispatch, alert, error, keyword, currentPage, price, category, rating])
@@ -85,7 +85,7 @@ const Home = ({ match }) => {
         count = filteredProductsCount
     }
     
-    let country = '';
+    let country = 'Lesotho';
     //traverse through location object to get country name
     function traverse_it(obj){
         for(var prop in obj){
@@ -126,9 +126,7 @@ const Home = ({ match }) => {
                                                         <li className ={isActive  && "active"}
                                                             style={{
                                                                 cursor: 'pointer',
-                                                                listStyleType: 'none',
-                                                                
-                                                               
+                                                                listStyleType: 'none',                  
                                                                
                                                             }}
                                                             key={category}
@@ -142,6 +140,9 @@ const Home = ({ match }) => {
                                                     ))}
                                                 </ul>
                                         </div>
+                    
+
+                                        
                                     
                                 
                     <h1 id="products_heading">Latest Products</h1>

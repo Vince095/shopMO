@@ -56,8 +56,9 @@ import axios from 'axios'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
-//Store
+//Vendor
 ///import Store  from './components/seller/Store'
+import vendorDashboard  from './components/seller/vendorAdmin/Dashboard'
 
 
 
@@ -118,7 +119,8 @@ function App() {
           <ProtectedRoute path="/order/:id" component={OrderDetails} exact />
         </div>
 
-        <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
+        <ProtectedRoute path="/dashboard" isAdmin={true} isVendor={true} component={Dashboard} exact />
+        <ProtectedRoute path="vendor/dashboard" isVendor={true} component={vendorDashboard} exact />
         <ProtectedRoute path ="/admin/seller" isAdmin={true} component={NewSeller} exact />
         <ProtectedRoute path ="/admin/sellers" isAdmin={true} component={Sellers} exact />
         <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />

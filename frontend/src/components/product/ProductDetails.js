@@ -128,7 +128,7 @@ const ProductDetails = ({ match }) => {
     const currency = () => {
 
         let data = location.user.data;
-        let country = '';
+        let country = 'Lesotho';
         for(let item in data){
             if(item === "country"){
                 
@@ -189,7 +189,7 @@ const ProductDetails = ({ match }) => {
 
                                 <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                             </div>
-                            <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={product.stock === 0} onClick={addToCart}>Add to Cart</button>
+                            <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={product.stock <= 0} onClick={addToCart}>Add to Cart</button>
 
                             <hr />
 
