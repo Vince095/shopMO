@@ -260,7 +260,7 @@ const ProductDetails = ({ match }) => {
                                
                                     {product.category && product.reviews.length>0 && (
                                         
-                                        <ul className="">
+                                        <ul className="col align-self-center">
                                             <h2> Related items </h2>
                                             {recommendProduct.map(product => (
                                                <li

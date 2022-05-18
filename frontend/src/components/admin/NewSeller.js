@@ -89,7 +89,7 @@ const NewSeller = ({ history }) => {
                     </div>
 
                 }
-                <div className="col-12 col-md-10">
+                <div className="col-12 col-md align-self-center">
                     <Fragment>
                         <div className="wrapper my-5">
                             <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>

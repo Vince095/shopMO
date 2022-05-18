@@ -70,7 +70,8 @@ const Footer = () => {
 
                <p className='text-center mt-1'> Follow Us</p>
                <div className='col-6 col-md text-center'>
-               <box-icon type="logo" size="1.5rem" color="#fff" name="facebook-circle"></box-icon>
+                   <a href='https://www.facebook.com/ShopMo-107843338500582/' className='text-muted'>
+               <box-icon type="logo" size="1.5rem" color="#fff" name="facebook-circle"></box-icon></a>
                <box-icon type='logo' size='1.5rem' color='#fff' name='instagram-alt'></box-icon>
                <box-icon name='twitter' size='1.5rem' type='logo' color='#fff' ></box-icon>
                </div>
