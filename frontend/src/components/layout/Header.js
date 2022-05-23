@@ -64,7 +64,7 @@ const Header = () => {
                             <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
 
                                 {user && (user.role === 'admin' || user.role ==='seller' ) && (
-                                    <Link className="dropdown-item" to="/dashboard"><box-icon type="solid" color="#febd69" name="dashboard"></box-icon> Dashboard</Link>
+                                    <Link className="dropdown-item" to={user.role=== "seller"?"/vendor/dashboard":"/dashboard"}><box-icon type="solid" color="#febd69" name="dashboard"></box-icon> Dashboard</Link>
                                 )}
                                 <Link className="dropdown-item" to="/orders/me"><box-icon type="solid" color="#febd69" name="truck"></box-icon> Orders</Link>
                                 <Link className="dropdown-item" to="/me"><box-icon type="solid" color="#febd69" name="user-account"></box-icon> Profile</Link>

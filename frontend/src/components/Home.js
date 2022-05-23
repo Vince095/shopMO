@@ -85,7 +85,7 @@ const Home = ({ match }) => {
         count = filteredProductsCount
     }
     
-    let country = 'Lesotho';
+    let country = 'Nigeria';
     //traverse through location object to get country name
     function traverse_it(obj){
         for(var prop in obj){

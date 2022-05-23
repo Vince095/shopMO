@@ -1,193 +1,339 @@
-import React, { Fragment, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Row, Col, CardBody, Card, Button } from 'reactstrap';
 
-import MetaData from '../../layout/MetaData'
-import Loader from '../../layout/Loader'
-import Sidebar from '../../admin/Sidebar'
-import SalesChart from '../../admin/charts/Sales';
+import Sidebar from '../../admin/Sidebar';
 
-import { useDispatch, useSelector } from 'react-redux'
+import Chart from 'react-apexcharts';
+ 
+const Dashboard = ()=> {
+  
+  const chart30Options = {
+    chart: {
+      toolbar: {
+        show: false
+      },
+      sparkline: {
+        enabled: true
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    colors: ['#3c44b1'],
+    stroke: {
+      color: '#4191ff',
+      curve: 'smooth',
+      width: 4
+    },
+    xaxis: {
+      crosshairs: {
+        width: 1
+      }
+    },
+    yaxis: {
+      min: 0
+    },
+    legend: {
+      show: false
+    }
+  };
+  const chart30Data = [
+    {
+      name: 'Customers',
+      data: [47, 38, 56, 24, 45, 54, 38, 47, 38, 56, 24, 56, 24, 65]
+    }
+  ];
 
-import { getAdminProducts } from '../../../actions/productActions'
-import { allOrders } from '../../../actions/orderActions'
-import { allUsers } from '../../../actions/userActions'
-import { getAllSellers} from '../../../actions/sellerActions'
+  const chart31Options = {
+    chart: {
+      toolbar: {
+        show: false
+      },
+      sparkline: {
+        enabled: true
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    colors: ['#f4772e'],
+    stroke: {
+      color: '#4191ff',
+      curve: 'smooth',
+      width: 3
+    },
+    xaxis: {
+      crosshairs: {
+        width: 1
+      }
+    },
+    yaxis: {
+      min: 0
+    },
+    legend: {
+      show: false
+    }
+  };
+  const chart31Data = [
+    {
+      name: 'Sales',
+      data: [47, 38, 56, 24, 45, 54, 38, 47, 38, 56, 24, 56, 24, 65]
+    }
+  ];
 
-const Dashboard = () => {
-
-    const dispatch = useDispatch();
-
-    const { products } = useSelector(state => state.products)
-    const { users } = useSelector(state => state.allUsers)
-    const { orders, totalAmount, loading } = useSelector(state => state.allOrders)
-    const { sellers } = useSelector(state => state.allSellers)
-
-    const rate = 20;
-    let outOfStock = 0;
-    products.forEach(product => {
-        if (product.stock === 0) {
-            outOfStock += 1;
-        }
-    })
-
-    useEffect(() => {
-        dispatch(getAdminProducts())
-        dispatch(allOrders())
-        dispatch(allUsers())
-        dispatch(getAllSellers())
-    }, [dispatch])
-
-    return (
-        <Fragment>
-            <div className="row">
+  return (
+    <Fragment >
+       <div className="row">
                 <div className="col-12 col-md-2">
                     <Sidebar />
                 </div>
-
-                <div className="col-12 col-md-10">
-                    <h1 className="my-4">Dashboard</h1>
-
-                    {loading ? <Loader /> : (
-                        <Fragment>
-                            <MetaData title={'Admin Dashboard'} />
-
-                            <div className="row pr-4">
-                                <div className="col-xl-12 col-sm-12 mb-3">
-                                    <div className="card text-white bg-primary o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="text-center card-font-size">Total Amount<br /> <b>M{totalAmount && totalAmount.toFixed(2) * rate}</b>
-                                                 
-                                            </div>
-                                             
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="row pr-4">
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-success o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="text-center card-font-size">Products<br /> <b>{products && products.length}</b></div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/products">
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right">
-                                                <i className="fa fa-angle-right"></i>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-danger o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="text-center card-font-size">Orders<br /> <b>{orders && orders.length}</b></div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/orders">
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right">
-                                                <i className="fa fa-angle-right"></i>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-info o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="text-center card-font-size">Users<br /> <b>{users && users.length}</b></div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/users">
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right">
-                                                <i className="fa fa-angle-right"></i>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-
-
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-warning o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="text-center card-font-size">Out of Stock<br /> <b>{outOfStock}</b></div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/soldout">
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right">
-                                                <i className="fa fa-angle-right"></i>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-
-                                <div className="col-xl-3 col-sm-6 mb-3">
-                                    <div className="card text-white bg-secondary o-hidden h-100">
-                                        <div className="card-body">
-                                            <div className="text-center card-font-size">Vendors<br /> <b>{ sellers && sellers.length}</b></div>
-                                        </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/sellers">
-                                            <span className="float-left">View Details</span>
-                                            <span className="float-right">
-                                                <i className="fa fa-angle-right"></i>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <h2 className="my-4">Statistics</h2>
-                            
-                            
-                            <div className="col-xl-4 col-sm-6 mb-3">
-                                    <Card className="card text-white bg-premium o-hidden h-100">
-                                        <div className="card-body">
-                                <div className="d-flex align-items-start">
-                                    <div className="font-weight-bold">
-                                    <small className="text-black-50 d-block mb-1 text-uppercase">
-                                        New Accounts
-                                    </small>
-                                    <span className="font-size-xxl mt-1 blue">{Math.floor(Math.random() * (10000 - 100 + 1)) + 10}</span>
-                                    </div>
-                                    <div className="ml-auto">
-                                    <div className="bg-white text-center text-success  rounded-circle">
-                                        <i className="fa fa-bar-chart"></i>
-                                       
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className="mt-3">
-                                    <i className="fa fa-caret-up text-success mr-1"></i>
-                                   
-                                    <span className="text-success pr-1">{(Math.floor(Math.random() * (100.00 - 0.50 + 1.01)) + 1.01).toFixed(2)}%</span>
-                                    <span className="text-black-50">increase this month</span>
-                                </div>
-                                </div>
-                                </Card>
-                            </div>
-                      
-
-                            <div className="row pr-4">
-                                <div className="col-xl-12 col-sm-12 mb-3">
-                                    <div className="card text-white  o-hidden h-100">
-                                        <SalesChart/>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </Fragment>
-                    )}
-
+       
+       <div className="col-12 col-md-10">
+      <Row>
+        <Col lg="4">
+          <Card className="card-box bg-dark border-0 text-light  mb-5">
+            <CardBody>
+              <div className="d-flex align-items-start">
+                <div className="font-weight-bold md-4">
+                  <small className="text-white-50 d-block mb-1 text-uppercase">
+                    Total revenue
+                  </small>
+                  <span className="font-size-xxl mt-1">$ 9,693</span>
                 </div>
+                <div className="ml-auto">
+                  <div className="bg-white text-center text-success d-50 rounded-circle">
+                    <FontAwesomeIcon
+                      icon={['far', 'chart-bar']}
+                      className="font-size-xl"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3">
+                <FontAwesomeIcon
+                  icon={['fas', 'arrow-up']}
+                  className="text-success mr-1"
+                />
+                <span className="text-success pr-1">15.4%</span>
+                <span className="text-white-50">increase this month</span>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg="4">
+          <Card className="card-box bg-bloom text-primary mb-5" style={{background:' #11245A ',background: 'radial-gradient( circle 610px at 5.2% 51.6%,  rgba(5,8,114,1) 0%, rgba(7,3,53,1) 97.5% )'}}>
+            <CardBody>
+              <div className="d-flex align-items-start">
+                <div className="font-weight-bold">
+                  <small className="text-white-50 d-block mb-1 text-uppercase">
+                    Sales
+                  </small>
+                  <span className="font-size-xxl mt-1">23,274</span>
+                </div>
+                <div className="ml-auto">
+                  <div className="bg-white text-center text-primary d-50 rounded-circle">
+                    <FontAwesomeIcon
+                      icon={['far', 'lightbulb']}
+                      className="font-size-xl"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3">
+                <FontAwesomeIcon
+                  icon={['fas', 'arrow-up']}
+                  className="text-warning mr-1"
+                />
+                <span className="text-warning pr-1">7.4%</span>
+                <span className="text-white-50">same as before</span>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg="4">
+          <Card className="card-box bg-plum-plate text-light mb-5" style={{background: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,152,155,1) 0.1%, rgba(0,94,120,1) 94.2% )'}}>
+            <CardBody>
+              <div className="d-flex align-items-start">
+                <div className="font-weight-bold">
+                  <small className="text-white-50 d-block mb-1 text-uppercase">
+                    Orders
+                  </small>
+                  <span className="font-size-xxl mt-1">345</span>
+                </div>
+                <div className="ml-auto">
+                  <div className="bg-white text-center text-primary d-50 rounded-circle">
+                    <FontAwesomeIcon
+                      icon={['far', 'chart-bar']}
+                      className="font-size-xl"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3">
+                <FontAwesomeIcon
+                  icon={['fas', 'arrow-down']}
+                  className="text-white mr-1"
+                />
+                <span className="text-white px-1">15.4%</span>
+                <span className="text-white-50">less orders</span>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col xl="6">
+          <Card className="card-box mb-5">
+            <CardBody className="p-0">
+              <Row className="mt-4">
+                <Col>
+                  <div className="text-center">
+                    <div>
+                      <FontAwesomeIcon
+                        icon={['far', 'user']}
+                        className="font-size-xxl text-success"
+                      />
+                    </div>
+                    <div className="mt-3 line-height-sm">
+                      <b className="font-size-lg">10</b>
+                      <span className="text-black-50 d-block">Products</span>
+                    </div>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="text-center">
+                    <div>
+                      <FontAwesomeIcon
+                        icon={['far', 'keyboard']}
+                        className="font-size-xxl text-danger"
+                      />
+                    </div>
+                    <div className="mt-3 line-height-sm">
+                      <b className="font-size-lg">3,568</b>
+                      <span className="text-black-50 d-block">Visits</span>
+                    </div>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="text-center">
+                    <div>
+                      <FontAwesomeIcon
+                        icon={['far', 'chart-bar']}
+                        className="font-size-xxl text-info"
+                      />
+                    </div>
+                    <div className="mt-3 line-height-sm">
+                      <b className="font-size-lg">$9,693</b>
+                      <span className="text-black-50 d-block">revenue</span>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+              <div className="divider mt-4" />
+              <div className="text-center py-4">
+                <Button size="sm" color="primary">
+                  <span className="btn-wrapper--icon">
+                    <FontAwesomeIcon icon={['far', 'eye']} />
+                  </span>
+                  <span className="btn-wrapper--label">Generate reports</span>
+                </Button>
+              </div>
+            </CardBody>
+            <div className="card-footer bg-light text-center">
+              <div className="pt-4 pr-4 pl-4">
+                <Chart
+                  options={chart30Options}
+                  series={chart30Data}
+                  type="line"
+                  height={100}
+                />
+              </div>
             </div>
-
-        </Fragment >
-    )
+          </Card>
+        </Col>
+        <Col xl="6">
+          <Card className="card-box mb-5">
+            <div className="card-body pb-1">
+              <Row>
+                <Col>
+                  <div className="text-center">
+                    <div>
+                      <FontAwesomeIcon
+                        icon={['far', 'user']}
+                        className="font-size-xxl text-success"
+                      />
+                    </div>
+                    <div className="mt-3 line-height-sm">
+                      <b className="font-size-lg">2,345</b>
+                      <span className="text-black-50 d-block">users</span>
+                    </div>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="text-center">
+                    <div>
+                      <FontAwesomeIcon
+                        icon={['far', 'keyboard']}
+                        className="font-size-xxl text-danger"
+                      />
+                    </div>
+                    <div className="mt-3 line-height-sm">
+                      <b className="font-size-lg">10</b>
+                      <span className="text-black-50 d-block">Processing</span>
+                    </div>
+                  </div>
+                </Col>
+                <Col>
+                  <div className="text-center">
+                    <div>
+                      <FontAwesomeIcon
+                        icon={['far', 'chart-bar']}
+                        className="font-size-xxl text-info"
+                      />
+                    </div>
+                    <div className="mt-3 line-height-sm">
+                      <b className="font-size-lg">5</b>
+                      <span className="text-black-50 d-block">Shipped</span>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+              <div className="pt-4 pr-4 pl-4">
+                <Chart
+                  options={chart31Options}
+                  series={chart31Data}
+                  type="line"
+                  height={100}
+                />
+              </div>
+            </div>
+            <div className="divider" />
+            <div className="my-2 text-center">
+              <FontAwesomeIcon
+                icon={['fas', 'arrow-up']}
+                className="text-danger"
+              />
+              <span className="text-danger px-1">15.4%</span>
+              <span className="text-black-50">new sales today</span>
+            </div>
+            <div className="card-footer bg-light p-4 text-center">
+              <Button color="first">
+                <span className="btn-wrapper--icon">
+                  <FontAwesomeIcon icon={['far', 'eye']} />
+                </span>
+                <span className="btn-wrapper--label">View latest sales</span>
+              </Button>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+      </div>
+      </div>
+    </Fragment>
+  );
 }
 
 export default Dashboard

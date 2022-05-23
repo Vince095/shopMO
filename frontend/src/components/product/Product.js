@@ -11,7 +11,7 @@ const Product = ({ product, col }) => {
     const currency = () => {
 
         let data = location.user.data;
-        let country = 'Lesotho';
+        let country = 'Nigeria';
         for(let item in data){
             if(item === "country"){
                 

@@ -27,11 +27,11 @@ router.route('/seller/products').get(getProductFromSeller);
 router.route('/product/:id').get(getSingleProduct);
 router.route('/admin/soldOut').get(getSoldOutProducts);
 
-router.route('/admin/product/new').post(isAuthenticatedUser, authorizeRoles('admin'), newProduct);
+router.route('/admin/product/new').post(isAuthenticatedUser, authorizeRoles('admin','seller'), newProduct);
 
 router.route('/admin/product/:id')
-    .put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct)
-    .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct);
+    .put(isAuthenticatedUser, authorizeRoles('admin','seller'), updateProduct)
+    .delete(isAuthenticatedUser, authorizeRoles('admin','seller'), deleteProduct);
 
 
 router.route('/review').put(isAuthenticatedUser, createProductReview)

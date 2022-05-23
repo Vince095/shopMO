@@ -6,6 +6,7 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, removeItemFromCart } from '../../actions/cartActions'
+import currency from '../layout/currency'
 
 const Cart = ({ history }) => {
 
@@ -39,6 +40,36 @@ const Cart = ({ history }) => {
         history.push('/login?redirect=shipping')
     }
 
+    const location = useSelector(state => state.userCountry)
+    let exRate = 1;
+
+    const currency = () => {
+
+        let data = location.user.data;
+        let country = 'Lesotho';
+        for(let item in data){
+            if(item === "country"){
+                
+               country = data[item];
+            }
+        }
+        if (country === 'Nigeria') {
+            exRate = 414.48;
+            return '₦'
+        } else if (country === 'Ghana') {
+            exRate = 7.51;
+            return '₵'
+        }else if (country === 'Lesotho') {
+            exRate = 17;
+            return 'M'
+        }else if (country === 'South Africa') {
+            exRate = 16;
+            return 'R'
+        }else {
+            return '$'
+        }   
+    }
+
     return (
         <Fragment>
             <MetaData title={'Your Cart'} />
@@ -65,7 +96,7 @@ const Cart = ({ history }) => {
 
 
                                             <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                                                <p id="card_item_price">M{(item.price *20).toFixed(2)}</p>
+                                                <p id="card_item_price"><small>{currency()}</small>{(item.price*exRate).toFixed(2)}</p>
                                             </div>
 
                                             <div className="col-4 col-lg-3 mt-4 mt-lg-0">
@@ -95,7 +126,7 @@ const Cart = ({ history }) => {
                                 <h4>Order Summary</h4>
                                 <hr />
                                 <p>Subtotal:  <span className="order-summary-values">{cartItems.reduce((acc, item) => (acc + Number(item.quantity)), 0)} (Units)</span></p>
-                                <p>Est. total: <span className="order-summary-values">M{cartItems.reduce((acc, item) => acc + item.quantity * item.price*20, 0).toFixed(2)}</span></p>
+                                <p>Est. total: <span className="order-summary-values">currancy(location,exRate){cartItems.reduce((acc, item) => acc + item.quantity * item.price*exRate, 0).toFixed(2)}</span></p>
 
                                 <hr />
                                 <button id="checkout_btn" className="btn btn-primary btn-block" onClick={checkoutHandler}>Check out</button>

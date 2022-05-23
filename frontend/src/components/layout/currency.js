@@ -1,7 +1,6 @@
 // currency conversion
-const currency = (location) => {
+const currency = (location, exRate) => {
     
-    let exRate = 1;
 
         if (location.user.country === 'Nigeria') {
             exRate = 414.48;

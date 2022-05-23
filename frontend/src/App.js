@@ -58,7 +58,7 @@ import { loadStripe } from '@stripe/stripe-js'
 
 //Vendor
 ///import Store  from './components/seller/Store'
-import vendorDashboard  from './components/seller/vendorAdmin/Dashboard'
+import VendorDashboard  from './components/seller/vendorAdmin/Dashboard'
 
 
 
@@ -120,7 +120,7 @@ function App() {
         </div>
 
         <ProtectedRoute path="/dashboard" isAdmin={true} isVendor={true} component={Dashboard} exact />
-        <ProtectedRoute path="vendor/dashboard" isVendor={true} component={vendorDashboard} exact />
+        <ProtectedRoute path="/vendor/dashboard" isVendor={true} isAdmin={true} component={VendorDashboard} exact />
         <ProtectedRoute path ="/admin/seller" isAdmin={true} component={NewSeller} exact />
         <ProtectedRoute path ="/admin/sellers" isAdmin={true} component={Sellers} exact />
         <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />

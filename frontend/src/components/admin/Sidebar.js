@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Sidebar = () => {
+    const { user } = useSelector(state => state.auth)
     return (
         <div className="sidebar-wrapper">
             <nav id="sidebar">
@@ -27,15 +29,15 @@ const Sidebar = () => {
                     <li>
                         <Link to="/admin/orders"><i className="fa fa-shopping-basket"></i> Orders</Link>
                     </li>
-
+                    {user.role === 'admin' && (
                     <li>
                         <Link to="/admin/users"><i className="fa fa-users"></i> Users</Link>
-                    </li>
+                    </li>)}
 
                     <li>
                         <Link to="/admin/reviews"><i className="fa fa-star"></i> Reviews</Link>
                     </li>
-
+                    { user.role === 'admin' && (
                     <li>
                         <a href="#sellerSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle"><i
                             className="fa fa-handshake-o"></i> Stores</a>
@@ -48,7 +50,7 @@ const Sidebar = () => {
                                 <Link to="/admin/seller"><i className="fa fa-plus"></i> Create</Link>
                             </li>
                         </ul>
-                    </li>
+                    </li>)}
 
                 </ul>
             </nav>
