@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import currency from '../layout/currency'
 
 import {  useSelector } from 'react-redux'
 
@@ -7,33 +8,34 @@ const Product = ({ product, col }) => {
 
     const location = useSelector(state => state.userCountry)
     let exRate = 1;
+    currency(location, exRate)
 
-    const currency = () => {
+    // const currency = () => {
 
-        let data = location.user.data;
-        let country = 'Nigeria';
-        for(let item in data){
-            if(item === "country"){
+    //     let data = location.user.data;
+    //     let country = 'Lesotho';
+    //     for(let item in data){
+    //         if(item === "country"){
                 
-               country = data[item];
-            }
-        }
-        if (country === 'Nigeria') {
-            exRate = 414.48;
-            return '₦'
-        } else if (country === 'Ghana') {
-            exRate = 7.51;
-            return '₵'
-        }else if (country === 'Lesotho') {
-            exRate = 17;
-            return 'M'
-        }else if (country === 'South Africa') {
-            exRate = 16;
-            return 'R'
-        }else {
-            return '$'
-        }   
-    }
+    //            country = data[item];
+    //         }
+    //     }
+    //     if (country === 'Nigeria') {
+    //         exRate = 414.48;
+    //         return '₦'
+    //     } else if (country === 'Ghana') {
+    //         exRate = 7.51;
+    //         return '₵'
+    //     }else if (country === 'Lesotho') {
+    //         exRate = 17;
+    //         return 'M'
+    //     }else if (country === 'South Africa') {
+    //         exRate = 16;
+    //         return 'R'
+    //     }else {
+    //         return '$'
+    //     }   
+    // }
     return (
         <div className={`col-sm-12 col-md-6 col-lg-${col} my-3`}>
             <div className="card p-3 rounded">

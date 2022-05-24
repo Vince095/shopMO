@@ -128,7 +128,7 @@ const ProductDetails = ({ match }) => {
     const currency = () => {
 
         let data = location.user.data;
-        let country = '';
+        let country = 'Lesotho';
         for(let item in data){
             if(item === "country"){
                 

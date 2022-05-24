@@ -9,7 +9,7 @@ const Sidebar = () => {
             <nav id="sidebar">
                 <ul className="list-unstyled components">
                     <li>
-                        <Link to="/dashboard"><i className="fa fa-tachometer"></i> Dashboard</Link>
+                        <Link to={user.role === 'seller'?'/vendor/dashboard': '/dashboard'}><i className="fa fa-tachometer"></i> Dashboard</Link>
                     </li>
 
                     <li>

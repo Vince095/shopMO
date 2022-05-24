@@ -8,6 +8,7 @@ import Product from './product/Product'
 import Loader from './layout/Loader'
 import shuffleArray from './product/shuffleArray'
 import Display from './layout/Slider'
+import currency from './layout/currency';
 
 
 import { useDispatch, useSelector } from 'react-redux'

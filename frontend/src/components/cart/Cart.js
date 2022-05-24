@@ -126,7 +126,7 @@ const Cart = ({ history }) => {
                                 <h4>Order Summary</h4>
                                 <hr />
                                 <p>Subtotal:  <span className="order-summary-values">{cartItems.reduce((acc, item) => (acc + Number(item.quantity)), 0)} (Units)</span></p>
-                                <p>Est. total: <span className="order-summary-values">currancy(location,exRate){cartItems.reduce((acc, item) => acc + item.quantity * item.price*exRate, 0).toFixed(2)}</span></p>
+                                <p>Est. total: <span className="order-summary-values">{currency(location,exRate)}{cartItems.reduce((acc, item) => acc + item.quantity * item.price*exRate, 0).toFixed(2)}</span></p>
 
                                 <hr />
                                 <button id="checkout_btn" className="btn btn-primary btn-block" onClick={checkoutHandler}>Check out</button>
