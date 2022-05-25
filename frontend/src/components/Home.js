@@ -65,7 +65,7 @@ const Home = ({ match }) => {
 
         dispatch(getProducts(keyword, currentPage, price, category, rating));
         dispatch(getCountry());
-       // dispatch(getSellerProducts('Anta sports'));
+        dispatch(getSellerProducts('Anta sports'));
 
 
     }, [dispatch, alert, error, keyword, currentPage, price, category, rating])

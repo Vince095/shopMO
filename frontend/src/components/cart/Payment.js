@@ -9,6 +9,7 @@ import 'react-credit-cards/es/styles-compiled.css'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { createOrder, clearErrors } from '../../actions/orderActions'
+import currency from '../layout/currency'
 
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 
@@ -125,11 +126,20 @@ const Payment = ({ history }) => {
             alert.error(error.response.data.message)
         }
     }
+    let location = useSelector(state => state.userCountry);
+    let exRate = currency(location).exRate;
+    let symbol = currency(location).symbol;
 
     const virtualCards = ['4242424242424242', '4000056655665556', '4000056655665572', '5200828282828210', '6011981111111113','2227200000000009']
     const [data , setData] = React.useState({cvc: "654"});
+    const [focus, setFocus] = React.useState('');
+
+    const handleFocus = (e) => {
+        setFocus( 'cvc' );
+        
+    }
     const handleInputChange = (e) => 
-        setData({...data, [e.target.name]: e.target.value});
+        setData({...data, data: e.target.value});
 
     return (
         <Fragment>
@@ -150,7 +160,7 @@ const Payment = ({ history }) => {
 
                 :<div>
                     <h1 >Payment methods</h1>
-                    <button onClick={() => {setCheckout(true)}} id="view_btn" className="btn btn-block py-3">Use credit/debit card {` - M${orderInfo && (orderInfo.totalPrice*20).toFixed(2)}`}</button>
+                    <button onClick={() => {setCheckout(true)}} id="view_btn" className="btn btn-block py-3">Use credit/debit card {` - ${symbol}${orderInfo && (orderInfo.totalPrice*exRate).toFixed(2)}`}</button>
                 </div>
             }
         </div>
@@ -168,6 +178,7 @@ const Payment = ({ history }) => {
                                    
                                     cvc={data.cvc}
                                     expiry={'12/26'}
+                                    focused={focus}
                                     name={user.name}
                                     number={virtualCards[Math.floor(Math.random() * virtualCards.length)]}
                             />
@@ -202,6 +213,7 @@ const Payment = ({ history }) => {
                                 className="form-control"
                                 options={options}
                                 onChange={handleInputChange}
+                                onFocus={handleFocus}
                             />
                         </div>
 
@@ -211,14 +223,14 @@ const Payment = ({ history }) => {
                             type="submit"
                             className="btn btn-block py-3"
                         >
-                           Pay {` - M${orderInfo && (orderInfo.totalPrice*20).toFixed(2)}`}
+                           Pay {` - ${symbol}${orderInfo && (orderInfo.totalPrice*exRate).toFixed(2)}`}
                         </button>
 
                     </form>
                 </div>
                 :
                 <div>
-                    <button onClick={() => {setPay(true)}} id="view_btn" className="btn btn-block py-3">mpesa/eco-cash/cash on delivery {` - M${orderInfo && (orderInfo.totalPrice*20).toFixed(2)}`}</button>
+                    <button onClick={() => {setPay(true)}} id="view_btn" className="btn btn-block py-3">mpesa/eco-cash/cash on delivery {` - ${symbol}${orderInfo && (orderInfo.totalPrice*exRate).toFixed(2)}`}</button>
                 </div>
     }
             </div>

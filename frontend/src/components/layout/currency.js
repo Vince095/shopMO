@@ -1,9 +1,13 @@
 // currency conversion
 
-const currency = (location, exRate) => {
+const currency = (location) => {
 
     let data = location;
+    let exRate = 1,
+        symbol = '$';
+
     let country = 'Lesotho';
+
     for(let item in data){
         if(item === "country"){
             
@@ -12,18 +16,25 @@ const currency = (location, exRate) => {
     }
     if (country === 'Nigeria') {
         exRate = 414.48;
-        return '₦'
+        symbol = '₦'
+        
+        return {symbol , exRate}
     } else if (country === 'Ghana') {
         exRate = 7.51;
-        return '₵'
+        symbol = '₵'
+        return {symbol , exRate}
+
     }else if (country === 'Lesotho') {
         exRate = 17;
-        return 'M'
+        symbol = 'M'
+        return {symbol , exRate}
+
     }else if (country === 'South Africa') {
         exRate = 16;
-        return 'R'
+        symbol = 'R'
+        return {symbol , exRate}
     }else {
-        return '$'
+        return {symbol , exRate}
     }   
 }
 export default currency

@@ -7,8 +7,9 @@ import {  useSelector } from 'react-redux'
 const Product = ({ product, col }) => {
 
     const location = useSelector(state => state.userCountry)
-    let exRate = 1;
-    currency(location, exRate)
+    let exRate = currency(location).exRate;
+    let symbol = currency(location).symbol;
+
 
     // const currency = () => {
 
@@ -53,7 +54,7 @@ const Product = ({ product, col }) => {
                         </div>
                         <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
                     </div>
-                    <p className="card-text"><small>{currency()}</small> {(product.price*exRate).toFixed(2)}</p>
+                    <p className="card-text"><small>{symbol}</small> {(product.price*exRate).toFixed(2)}</p>
                     <Link to={`/product/${product._id}`} id="view_btn" className="btn btn-block">View Details</Link>
                 </div>
             </div>

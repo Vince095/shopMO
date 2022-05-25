@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import MetaData from '../layout/MetaData'
 import CheckoutSteps from './CheckoutSteps'
+import currency from '../layout/currency'
 
 import { useSelector } from 'react-redux'
 
@@ -10,11 +11,13 @@ const ConfirmOrder = ({ history }) => {
 
     const { cartItems, shippingInfo } = useSelector(state => state.cart)
     const { user } = useSelector(state => state.auth)
-    const rate = 20;
+    const location = useSelector(state => state.userCountry)
+    let exRate = currency(location).exRate;
+    let symbol = currency(location).symbol;
 
     // Calculate Order Prices
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
-    const shippingPrice = itemsPrice > 200 ? 0 : 2.5
+    const shippingPrice = itemsPrice > 200 ? 0 : 3;
     const taxPrice = Number((0.007 * itemsPrice).toFixed(2))
     const totalPrice = (itemsPrice + shippingPrice + taxPrice).toFixed(2)
 
@@ -63,7 +66,7 @@ const ConfirmOrder = ({ history }) => {
 
 
                                     <div className="col-4 col-lg-4 mt-4 mt-lg-0">
-                                        <p>{item.quantity} x M {(item.price* rate).toFixed(2)} = <b>M {(item.quantity * item.price * rate).toFixed(2)}</b></p>
+                                        <p>{item.quantity} x {symbol}{(item.price* exRate).toFixed(2)} = <b>M {(item.quantity * item.price * exRate).toFixed(2)}</b></p>
                                     </div>
 
                                 </div>
@@ -80,13 +83,13 @@ const ConfirmOrder = ({ history }) => {
                     <div id="order_summary">
                         <h4>Order Summary</h4>
                         <hr />
-                        <p>Subtotal:  <span className="order-summary-values">M {itemsPrice * rate}</span></p>
-                        <p>Shipping: <span className="order-summary-values">M {shippingPrice * rate}</span></p>
-                        <p>Tax:  <span className="order-summary-values">M {taxPrice * rate}</span></p>
+                        <p>Subtotal:  <span className="order-summary-values">{symbol} {itemsPrice * exRate}</span></p>
+                        <p>Shipping: <span className="order-summary-values">{symbol} {shippingPrice * exRate}</span></p>
+                        <p>Tax:  <span className="order-summary-values">{symbol} {(taxPrice * exRate).toFixed(2)}</span></p>
 
                         <hr />
 
-                        <p>Total: <span className="order-summary-values">M {(totalPrice * rate).toFixed(2) }</span></p>
+                        <p>Total: <span className="order-summary-values">{symbol} {(totalPrice * exRate).toFixed(2) }</span></p>
 
                         <hr />
                         <button id="checkout_btn" className="btn btn-primary btn-block" onClick={processToPayment}>Proceed to Payment</button>

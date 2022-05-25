@@ -6,6 +6,7 @@ import MetaData from '../layout/MetaData'
 import ListReviews from '../review/ListReviews'
 import shuffleArray from './shuffleArray'
 import Product from './Product'
+import currency from '../layout/currency'
 
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
@@ -123,34 +124,8 @@ const ProductDetails = ({ match }) => {
     }
 
     const location = useSelector(state => state.userCountry)
-    let exRate = 1;
-
-    const currency = () => {
-
-        let data = location.user.data;
-        let country = 'Lesotho';
-        for(let item in data){
-            if(item === "country"){
-                
-               country = data[item];
-            }
-        }
-        if (country === 'Nigeria') {
-            exRate = 414.48;
-            return '₦'
-        } else if (country === 'Ghana') {
-            exRate = 7.51;
-            return '₵'
-        }else if (country === 'Lesotho') {
-            exRate = 17;
-            return 'M'
-        }else if (country === 'South Africa') {
-            exRate = 16;
-            return 'R'
-        }else {
-            return '$'
-        }   
-    }
+    let exRate = currency(location).exRate;
+    let symbol = currency(location).symbol;
 
     return (
         <Fragment>
@@ -181,7 +156,7 @@ const ProductDetails = ({ match }) => {
 
                             <hr />
 
-                            <p id="product_price"><small>{currency()}</small>{(product.price*exRate).toFixed(2)}</p>
+                            <p id="product_price"><small>{symbol}</small>{(product.price*exRate).toFixed(2)}</p>
                             <div className="stockCounter d-inline">
                                 <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
 
