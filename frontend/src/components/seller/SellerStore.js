@@ -3,26 +3,26 @@ import Pagination from 'react-js-pagination'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css';
 
-import MetaData from './layout/MetaData'
-import Product from './product/Product'
-import Loader from './layout/Loader'
-import shuffleArray from './product/shuffleArray'
-import Display from './layout/Slider'
-import currency from './layout/currency';
+import MetaData from '../layout/MetaData'
+import Product from '../product/Product'
+import Loader from '../layout/Loader'
+import shuffleArray from '../product/shuffleArray'
+import Display from '../layout/Slider'
+import currency from '../layout/currency';
 
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert';
-import { getProducts } from '../actions/productActions'
-import { getCountry } from '../actions/userActions';
-import { getSellerProducts } from '../actions/sellerActions';
+import { getProducts } from '../../actions/productActions'
+import { getCountry } from '../../actions/userActions';
+import { getSellerProducts } from '../../actions/sellerActions';
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range)
 
 
 
-const Home = ({ match }) => {
+const SellerStore = ({ match }) => {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [price, setPrice] = useState([1, 1000])
@@ -50,7 +50,7 @@ const Home = ({ match }) => {
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
     const lookup = useSelector(state => state.userCountry)
-    const {product,} = useSelector(state => state.sellerProduct)
+    const sellerProduct = useSelector(state => state.sellerProduct)
 
 
     const keyword = match.params.keyword
@@ -231,14 +231,14 @@ const Home = ({ match }) => {
                                         </div>
                                     </div>
 
-                                   
+                                    <div className="col-6 col-md-9">
                                         <div className="row">
                                             
                                             {recommendProduct.map(product => (
                                                 <Product key={product._id} product={product} col={3} />
                                             ))}
                                         </div>
-                                   
+                                    </div>
                                 </Fragment>
                             ) : (
                                 
@@ -275,4 +275,4 @@ const Home = ({ match }) => {
     )
 }
 
-export default Home
+export default SellerStore

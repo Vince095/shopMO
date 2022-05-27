@@ -191,6 +191,7 @@ const Payment = ({ history }) => {
                                 id="card_num_field"
                                 className="form-control"
                                 options={options}
+                                
                             />
                         </div>
 

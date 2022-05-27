@@ -59,6 +59,7 @@ import { loadStripe } from '@stripe/stripe-js'
 //Vendor
 ///import Store  from './components/seller/Store'
 import VendorDashboard  from './components/seller/vendorAdmin/Dashboard'
+import SellerStore from './components/seller/SellerStore'
 
 
 
@@ -90,9 +91,10 @@ function App() {
         <Header />
         <div className="container container-fluid">
           <Route path="/" component={Home} exact />
+           
           <Route path="/search/:keyword" component={Home} />
           <Route path="/product/:id" component={ProductDetails} exact />
-          <Route path="/seller" component={Home} exact />
+          <Route path="/seller" component={SellerStore} exact />
 
           <Route path="/cart" component={Cart} exact />
           <ProtectedRoute path="/shipping" component={Shipping} />
