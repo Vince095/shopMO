@@ -136,6 +136,7 @@ const SellerStore = ({ match }) => {
                 <Fragment>
                     <MetaData title={sellerName} />
                                 <Display/>
+                               
                                 
                                 <div className="category">
                                  <ul>
@@ -160,8 +161,8 @@ const SellerStore = ({ match }) => {
                     
 
                    
-                    <h1 id="products_heading">Latest Products</h1>
-                    from <i class="fa fa-map-marker" aria-hidden="true"></i> {country}
+                    <h2 id="products_heading">Featured Products</h2>
+                    from <i class="fa fa-shopping-cart" aria-hidden="true"></i> {sellerName}
                             
 
                     <section id="products" className="container mt-5">
