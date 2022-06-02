@@ -11,6 +11,7 @@ import Display from './layout/Slider'
 import currency from './layout/currency';
 
 
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert';
 import { getProducts } from '../actions/productActions'
@@ -50,12 +51,12 @@ const Home = ({ match }) => {
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
     const lookup = useSelector(state => state.userCountry)
-    const {product,} = useSelector(state => state.sellerProduct)
+    const product = useSelector(state => state.sellerProduct.sellers)
 
 
     const keyword = match.params.keyword
 
-    const recommendProduct = shuffleArray(products);
+   
    
 
     useEffect(() => {
@@ -66,6 +67,7 @@ const Home = ({ match }) => {
         dispatch(getProducts(keyword, currentPage, price, category, rating));
         dispatch(getCountry());
         dispatch(getSellerProducts('Anta sports'));
+        
 
 
     }, [dispatch, alert, error, keyword, currentPage, price, category, rating])
@@ -99,6 +101,9 @@ const Home = ({ match }) => {
                     country = obj[prop];
                     console.log('The value of '+prop+' is '+obj[prop]+'.');
                 }
+                if(prop ==='sellers'){
+                    console.log(obj[prop])
+                }
                 
             }
         }
@@ -112,7 +117,17 @@ const Home = ({ match }) => {
         }
     } traverse_it(lookup.user.data);
    
-    //console.log(lookup.user.data);
+    let sellerProducts = [] ;
+    for(let elm in product){
+        if(elm === "products"){
+           sellerProducts = product[elm]
+        }
+    }
+
+    console.log("product", sellerProducts);
+    
+    const recommendProduct = shuffleArray(products);
+  
 
     return (
         <Fragment>
@@ -143,11 +158,8 @@ const Home = ({ match }) => {
                                         </div>
                     
 
-                                        
-                                    
-                                
-                    <h1 id="products_heading">Latest Products</h1>
                    
+                    <h1 id="products_heading">Latest Products</h1>
                     from <i class="fa fa-map-marker" aria-hidden="true"></i> {country}
                             
 
@@ -267,6 +279,7 @@ const Home = ({ match }) => {
                             />
                         </div>
                     )}
+                   
 
                 </Fragment>
             )}

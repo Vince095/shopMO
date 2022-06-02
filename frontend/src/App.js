@@ -94,7 +94,7 @@ function App() {
            
           <Route path="/search/:keyword" component={Home} />
           <Route path="/product/:id" component={ProductDetails} exact />
-          <Route path="/seller" component={SellerStore} exact />
+          <Route path="/seller/:sellerName" component={SellerStore} />
 
           <Route path="/cart" component={Cart} exact />
           <ProtectedRoute path="/shipping" component={Shipping} />

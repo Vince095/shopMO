@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import {Link} from 'react-router-dom'
 import { Carousel } from 'react-bootstrap'
 
 import Loader from '../layout/Loader'
@@ -123,9 +124,12 @@ const ProductDetails = ({ match }) => {
         dispatch(newReview(formData));
     }
 
+    console.log(match )
     const location = useSelector(state => state.userCountry)
-    let exRate = currency(location).exRate;
-    let symbol = currency(location).symbol;
+    const data = location.user.data
+    let exRate = currency(data).exRate;
+    let symbol = currency(data).symbol;
+
 
     return (
         <Fragment>
@@ -175,7 +179,7 @@ const ProductDetails = ({ match }) => {
                             <h4 className="mt-2">Description:</h4>
                             <p>{product.description}</p>
                             <hr />
-                            <p id="product_seller mb-3">Sold by: <strong>{product.seller}</strong></p>
+                            <p id="product_seller mb-3">Sold by: <Link className='card-title text-dark' to={`/seller/${product.seller}`}> <strong>{product.seller}</strong></Link></p>
 
                             {user ? <button id="review_btn" type="button" className="btn btn-primary mt-4" data-toggle="modal" data-target="#ratingModal" onClick={setUserRatings}>
                                 Submit Your Review

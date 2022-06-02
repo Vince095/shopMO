@@ -4,6 +4,7 @@ import { MDBDataTable } from 'mdbreact'
 
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
+import currency from '../layout/currency'
 
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,9 +12,14 @@ import { myOrders, clearErrors } from '../../actions/orderActions'
 
 const ListOrders = () => {
 
-    const rate = 20;
     const alert = useAlert();
     const dispatch = useDispatch();
+    
+    const location = useSelector(state => state.userCountry)
+    const data = location.user.data
+    let rate = currency(data).exRate;
+    let symbol = currency(data).symbol;
+
 
     const { loading, error, orders } = useSelector(state => state.myOrders);
 
@@ -62,7 +68,7 @@ const ListOrders = () => {
             data.rows.push({
                 id: order._id,
                 numOfItems: order.orderItems.length,
-                amount: `M ${order.totalPrice * rate}`,
+                amount: `${symbol} ${order.totalPrice * rate}`,
                 status: order.orderStatus && String(order.orderStatus).includes('Delivered')
                     ? <p style={{ color: 'green' }}>{order.orderStatus}</p>
                     : <p style={{ color: 'red' }}>{order.orderStatus}</p>,

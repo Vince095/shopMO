@@ -11,9 +11,12 @@ const ConfirmOrder = ({ history }) => {
 
     const { cartItems, shippingInfo } = useSelector(state => state.cart)
     const { user } = useSelector(state => state.auth)
+    
     const location = useSelector(state => state.userCountry)
-    let exRate = currency(location).exRate;
-    let symbol = currency(location).symbol;
+    const data = location.user.data
+    let exRate = currency(data).exRate;
+    let symbol = currency(data).symbol;
+
 
     // Calculate Order Prices
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
@@ -66,7 +69,7 @@ const ConfirmOrder = ({ history }) => {
 
 
                                     <div className="col-4 col-lg-4 mt-4 mt-lg-0">
-                                        <p>{item.quantity} x {symbol}{(item.price* exRate).toFixed(2)} = <b>M {(item.quantity * item.price * exRate).toFixed(2)}</b></p>
+                                        <p>{item.quantity} x {symbol}{(item.price* exRate).toFixed(2)} = <b>{symbol} {(item.quantity * item.price * exRate).toFixed(2)}</b></p>
                                     </div>
 
                                 </div>
