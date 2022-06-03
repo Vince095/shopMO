@@ -54,11 +54,6 @@ const ProductsList = ({ history }) => {
                     sort: 'asc'
                 },
                 {
-                    label: 'Picture',
-                    field: 'picture',
-                    sort: 'asc'
-                },
-                {
                     label: 'Price',
                     field: 'price',
                     sort: 'asc'
@@ -80,7 +75,6 @@ const ProductsList = ({ history }) => {
             data.rows.push({
                 id: product._id,
                 name: product.name,
-                picture: <img src={product.images[0].url} alt={product.name} style={{ width: '50px', height: '50px' }} />,
                 price: `$${product.price}`,
                 stock: product.stock,
                 actions: <Fragment>

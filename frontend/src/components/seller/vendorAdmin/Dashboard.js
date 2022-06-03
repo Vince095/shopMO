@@ -80,7 +80,7 @@ const Dashboard = ()=> {
   const chart31Data = [
     {
       name: 'Sales',
-      data: [34, 5, 56, 24, 45, 54, 38, 47, 38, 56, 24, 56, 24, 65]
+      data: [47, 38, 56, 24, 45, 54, 38, 47, 38, 56, 24, 56, 24, 65]
     }
   ];
 
@@ -267,8 +267,8 @@ const Dashboard = ()=> {
                       />
                     </div>
                     <div className="mt-3 line-height-sm">
-                      <b className="font-size-lg">2</b>
-                      <span className="text-black-50 d-block">Pending</span>
+                      <b className="font-size-lg">2,345</b>
+                      <span className="text-black-50 d-block">users</span>
                     </div>
                   </div>
                 </Col>

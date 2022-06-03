@@ -11,7 +11,6 @@ import Display from '../layout/Slider'
 import currency from '../layout/currency';
 
 
-
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert';
 import { getProducts } from '../../actions/productActions'
@@ -51,13 +50,12 @@ const SellerStore = ({ match }) => {
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
     const lookup = useSelector(state => state.userCountry)
-    const product = useSelector(state => state.sellerProduct.sellers)
+    const sellerProduct = useSelector(state => state.sellerProduct)
 
 
     const keyword = match.params.keyword
-    const sellerName = match.params.sellerName
 
-   
+    const recommendProduct = shuffleArray(products);
    
 
     useEffect(() => {
@@ -67,11 +65,10 @@ const SellerStore = ({ match }) => {
 
         dispatch(getProducts(keyword, currentPage, price, category, rating));
         dispatch(getCountry());
-        dispatch(getSellerProducts(sellerName));
-        
+        dispatch(getSellerProducts('Anta sports'));
 
 
-    }, [dispatch, alert, error, keyword, currentPage, price, category, rating, sellerName])
+    }, [dispatch, alert, error, keyword, currentPage, price, category, rating])
 
     function setCurrentPageNo(pageNumber) {
         setCurrentPage(pageNumber)
@@ -102,9 +99,6 @@ const SellerStore = ({ match }) => {
                     country = obj[prop];
                     console.log('The value of '+prop+' is '+obj[prop]+'.');
                 }
-                if(prop ==='sellers'){
-                    console.log(obj[prop])
-                }
                 
             }
         }
@@ -118,23 +112,13 @@ const SellerStore = ({ match }) => {
         }
     } traverse_it(lookup.user.data);
    
-    let sellerProducts = [] ;
-    for(let elm in product){
-        if(elm === "products"){
-           sellerProducts = product[elm]
-        }
-    }
-
-    console.log(match);
-    
-    const recommendProduct = shuffleArray(sellerProducts);
-  
+    //console.log(lookup.user.data);
 
     return (
         <Fragment>
             {loading ? <Loader /> : (
                 <Fragment>
-                    <MetaData title={sellerName} />
+                    <MetaData title={'Buy Best Products Online'} />
                                 <Display/>
                                
                                 
@@ -160,9 +144,18 @@ const SellerStore = ({ match }) => {
                                         </div>
                     
 
+<<<<<<< HEAD
                    
                     <h2 id="products_heading">Featured Products</h2>
                     from <i class="fa fa-shopping-cart" aria-hidden="true"></i> {sellerName}
+=======
+                                        
+                                    
+                                
+                    <h1 id="products_heading">Latest Products</h1>
+                   
+                    from <i class="fa fa-map-marker" aria-hidden="true"></i> {country}
+>>>>>>> parent of 15ffd7e (seller store modules)
                             
 
                     <section id="products" className="container mt-5">
@@ -245,14 +238,14 @@ const SellerStore = ({ match }) => {
                                         </div>
                                     </div>
 
-                                   
+                                    <div className="col-6 col-md-9">
                                         <div className="row">
                                             
                                             {recommendProduct.map(product => (
                                                 <Product key={product._id} product={product} col={3} />
                                             ))}
                                         </div>
-                                   
+                                    </div>
                                 </Fragment>
                             ) : (
                                 
@@ -281,7 +274,6 @@ const SellerStore = ({ match }) => {
                             />
                         </div>
                     )}
-                   
 
                 </Fragment>
             )}

@@ -7,9 +7,8 @@ import {  useSelector } from 'react-redux'
 const Product = ({ product, col }) => {
 
     const location = useSelector(state => state.userCountry)
-    const data = location.user.data
-    let exRate = currency(data).exRate;
-    let symbol = currency(data).symbol;
+    let exRate = currency(location).exRate;
+    let symbol = currency(location).symbol;
 
 
     return (

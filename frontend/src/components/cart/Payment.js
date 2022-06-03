@@ -126,12 +126,9 @@ const Payment = ({ history }) => {
             alert.error(error.response.data.message)
         }
     }
-    
-    const location = useSelector(state => state.userCountry)
-    const geoData = location.user.data
-    let exRate = currency(geoData).exRate;
-    let symbol = currency(geoData).symbol;
-
+    let location = useSelector(state => state.userCountry);
+    let exRate = currency(location).exRate;
+    let symbol = currency(location).symbol;
 
     const virtualCards = ['4242424242424242', '4000056655665556', '4000056655665572', '5200828282828210', '6011981111111113','2227200000000009']
     const [data , setData] = React.useState({cvc: "654"});

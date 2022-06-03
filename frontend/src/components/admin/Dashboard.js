@@ -7,7 +7,6 @@ import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 import Sidebar from './Sidebar'
 import SalesChart from './charts/Sales';
-import currency from '../layout/currency';
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -25,9 +24,7 @@ const Dashboard = () => {
     const { orders, totalAmount, loading } = useSelector(state => state.allOrders)
     const { sellers } = useSelector(state => state.allSellers)
 
-    const location = useSelector(state => state.userCountry)
-    const rate = currency(location).exRate;
-    const symbol = currency(location).symbol;
+    const rate = 20;
     let outOfStock = 0;
     products.forEach(product => {
         if (product.stock === 0) {
@@ -60,7 +57,7 @@ const Dashboard = () => {
                                 <div className="col-xl-12 col-sm-12 mb-3">
                                     <div className="card text-white bg-primary o-hidden h-100">
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Total Amount<br /> <b>{symbol}{totalAmount && (totalAmount * rate).toFixed(2)}</b>
+                                            <div className="text-center card-font-size">Total Amount<br /> <b>M{totalAmount && totalAmount.toFixed(2) * rate}</b>
                                                  
                                             </div>
                                              
