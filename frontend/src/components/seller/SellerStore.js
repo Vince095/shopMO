@@ -144,18 +144,12 @@ const SellerStore = ({ match }) => {
                                         </div>
                     
 
-<<<<<<< HEAD
-                   
-                    <h2 id="products_heading">Featured Products</h2>
-                    from <i class="fa fa-shopping-cart" aria-hidden="true"></i> {sellerName}
-=======
                                         
                                     
                                 
                     <h1 id="products_heading">Latest Products</h1>
                    
                     from <i class="fa fa-map-marker" aria-hidden="true"></i> {country}
->>>>>>> parent of 15ffd7e (seller store modules)
                             
 
                     <section id="products" className="container mt-5">
