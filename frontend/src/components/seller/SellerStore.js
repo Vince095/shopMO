@@ -11,6 +11,7 @@ import Display from '../layout/Slider'
 import currency from '../layout/currency';
 
 
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert';
 import { getProducts } from '../../actions/productActions'
@@ -50,12 +51,13 @@ const SellerStore = ({ match }) => {
 
     const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
     const lookup = useSelector(state => state.userCountry)
-    const sellerProduct = useSelector(state => state.sellerProduct)
+    const product = useSelector(state => state.sellerProduct.sellers)
 
 
     const keyword = match.params.keyword
+    const sellerName = match.params.sellerName
 
-    const recommendProduct = shuffleArray(products);
+   
    
 
     useEffect(() => {
@@ -65,10 +67,11 @@ const SellerStore = ({ match }) => {
 
         dispatch(getProducts(keyword, currentPage, price, category, rating));
         dispatch(getCountry());
-        dispatch(getSellerProducts('Anta sports'));
+        dispatch(getSellerProducts(sellerName));
+        
 
 
-    }, [dispatch, alert, error, keyword, currentPage, price, category, rating])
+    }, [dispatch, alert, error, keyword, currentPage, price, category, rating, sellerName])
 
     function setCurrentPageNo(pageNumber) {
         setCurrentPage(pageNumber)
@@ -99,6 +102,9 @@ const SellerStore = ({ match }) => {
                     country = obj[prop];
                     console.log('The value of '+prop+' is '+obj[prop]+'.');
                 }
+                if(prop ==='sellers'){
+                    console.log(obj[prop])
+                }
                 
             }
         }
@@ -112,15 +118,24 @@ const SellerStore = ({ match }) => {
         }
     } traverse_it(lookup.user.data);
    
-    //console.log(lookup.user.data);
+    let sellerProducts = [] ;
+    for(let elm in product){
+        if(elm === "products"){
+           sellerProducts = product[elm]
+        }
+    }
+
+    console.log(match);
+    
+    const recommendProduct = shuffleArray(sellerProducts);
+  
 
     return (
         <Fragment>
             {loading ? <Loader /> : (
                 <Fragment>
-                    <MetaData title={'Buy Best Products Online'} />
+                    <MetaData title={sellerName} />
                                 <Display/>
-                               
                                 
                                 <div className="category">
                                  <ul>
@@ -144,11 +159,8 @@ const SellerStore = ({ match }) => {
                                         </div>
                     
 
-                                        
-                                    
-                                
-                    <h1 id="products_heading">Latest Products</h1>
                    
+                    <h1 id="products_heading">Latest Products</h1>
                     from <i class="fa fa-map-marker" aria-hidden="true"></i> {country}
                             
 
@@ -232,14 +244,14 @@ const SellerStore = ({ match }) => {
                                         </div>
                                     </div>
 
-                                    <div className="col-6 col-md-9">
+                                   
                                         <div className="row">
                                             
                                             {recommendProduct.map(product => (
                                                 <Product key={product._id} product={product} col={3} />
                                             ))}
                                         </div>
-                                    </div>
+                                   
                                 </Fragment>
                             ) : (
                                 
@@ -268,6 +280,7 @@ const SellerStore = ({ match }) => {
                             />
                         </div>
                     )}
+                   
 
                 </Fragment>
             )}
