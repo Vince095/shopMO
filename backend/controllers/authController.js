@@ -345,10 +345,10 @@ exports.deleteSeller = catchAsyncErrors(async (req, res, next) => {
 //get geo location  =>  /api/v1/geo
 exports.getGeoLocation = catchAsyncErrors(async (req, res, next) => {
     
-        const {data} = await axios.get(`${process.env.IPGEOLOCTION_URL}`)
+        const {data} = await axios.get(`${process.env.IPGEOLOCATION_URL}`)
 
         res.status(200).json({
-            success: true,
+            success: true, 
             data
         })
  })
