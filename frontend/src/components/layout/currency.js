@@ -6,7 +6,7 @@ const currency = (location) => {
     let exRate = 1,
         symbol = '$';
 
-    let country = 'Nigeria';    
+    let country = 'Lesotho';    
 
     for(let item in data){
         if(item === "country"){

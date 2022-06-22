@@ -8,15 +8,30 @@ import Product from './product/Product'
 import Loader from './layout/Loader'
 import shuffleArray from './product/shuffleArray'
 import Display from './layout/Slider'
-import currency from './layout/currency';
+//import currency from './layout/currency';
+import Collection from './layout/Collection'
 
+
+import con from './layout/images/banner/connect.svg'
+import tech from './layout/images/banner/tech.svg'
+import gen from './layout/images/banner/gen.svg'
+import cam from './layout/images/banner/cam.svg'
+import work from './layout/images/banner/work.svg'
+import acc from './layout/images/banner/acc.svg'
+import home from './layout/images/banner/home.svg'
+import com from './layout/images/banner/com.svg'
+import sport from './layout/images/banner/sport.svg'
+import shoe from './layout/images/banner/shoe.svg'
+import food from './layout/images/banner/food.svg'
+import beauty from './layout/images/banner/beauty.svg'
+import accessories from './layout/images/banner/accessories.svg'
 
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from 'react-alert';
 import { getProducts } from '../actions/productActions'
 import { getCountry } from '../actions/userActions';
-import { getSellerProducts } from '../actions/sellerActions';
+//import { getSellerProducts } from '../actions/sellerActions';
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range)
@@ -66,7 +81,7 @@ const Home = ({ match }) => {
 
         dispatch(getProducts(keyword, currentPage, price, category, rating));
         dispatch(getCountry());
-        dispatch(getSellerProducts('Anta sports'));
+        //dispatch(getSellerProducts('Anta sports'));
         
 
 
@@ -157,8 +172,97 @@ const Home = ({ match }) => {
                                                 </ul>
                                         </div>
                     
+                                        <div className="container">
+                        <div className=" text-white text-center bg-primary">
+                            <h3 className="">Shop from our collection!!!</h3>
+                        </div>
+                        <div className="row m-4">
+                            <div className="col-md-2">
+                                <div className='collection-item' label = {'Electronics'} onClick={()=>setCategory('Electronics')}> 
+                                    <img src={con} alt="connect" className="img-fluid" />
+                                </div>
+                                <p >stay connected</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('')}>
+                                    <img src={tech} alt="connect" className="img-fluid" />
+                                </div>
+                                <p >Miscellaneous</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Clothes/Shoes')}>
+                                    <img src={gen} alt="connect" className="img-fluid" />
+                                </div>
+                                <p >light up</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Cameras')}>
+                                    <img src={cam}alt="connect" className="img-fluid" />
+                                </div>
+                                <p >smart home</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Laptops')}>
+                                    <img src={work}alt="connect" className="img-fluid" />
+                                </div>
+                                <p >work from home</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Food')}>
+                                    <img src={food}alt="connect" className="img-fluid" />
+                                </div>
+                                <p >Grocery </p>
+                            </div>
+                            
+                            
+                      </div>
+                      <div className="row m-4   ">
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Headphones')}>
+                                    <img src={acc} alt="connect" className="img-fluid" />
+                                </div>
+                                <p >mobile accessories</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Accessories')}>
+                                    <img src={accessories} alt="connect" className="img-fluid" />
+                                </div>
+                                <p >Accessories</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Sports')}>
+                                    <img src={sport} alt="connect" className="img-fluid" />
+                                </div>
+                                <p >sport and fitness</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Clothes/Shoes')}>
+                                    <img src={shoe}alt="connect" className="img-fluid" />
+                                </div>
+                                <p >Outfits</p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Beauty/Health')}>
+                                    <img src={beauty}alt="connect" className="img-fluid" />
+                                </div>
+                                <p >Beauty </p>
+                            </div>
+                            <div className="col-md-2">
+                                <div className='collection-item'  onClick={()=>setCategory('Home')}>
+                                    <img src={home}alt="connect" className="img-fluid" />
+                                </div>
+                                <p >Home Entertainment </p>
+                            </div>
+                           
+                       </div>
 
-                   
+                    </div>
+                    {/* <Collection match ={match} /> */}
+
+
+
+
+
                     <h1 id="products_heading">Latest Products</h1>
                     from <i class="fa fa-map-marker" aria-hidden="true"></i> {country}
                             
@@ -247,7 +351,7 @@ const Home = ({ match }) => {
                                         <div className="row">
                                             
                                             {recommendProduct.map(product => (
-                                                <Product key={product._id} product={product} col={3} />
+                                                <Product key={product._id} product={product} col={4} />
                                             ))}
                                         </div>
                                    
